@@ -3,6 +3,9 @@ import z from 'zod';
 const loginValidationSchema = z.object({
     email: z
         .string()
+        .min(1, {
+            error: 'Email is required',
+        })
         .trim()
         .lowercase()
         .pipe(
