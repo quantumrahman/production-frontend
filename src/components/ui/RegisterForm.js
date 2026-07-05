@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import registerValidationSchema from '@/validators/registerValidationSchema';
+
 import { FcGoogle } from 'react-icons/fc';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import registerValidationSchema from '@/validators/registerValidationSchema';
+import { authClient } from '@/lib/authClient';
 
 export default function RegisterForm() {
     const {
@@ -15,8 +17,25 @@ export default function RegisterForm() {
         resolver: zodResolver(registerValidationSchema),
     });
 
-    const handleOnSubmit = (data) => {
-        console.log(data);
+    const handleOnSubmit = async (form) => {
+        const { email, name, photo, password } = form;
+
+        const { data, error } = await authClient.signUp.email({
+            email,
+            password,
+            name,
+            image: photo,
+        });
+
+        if (data?.token) {
+            alert('Registration successfully.');
+            return;
+        }
+
+        if (error?.status === 422) {
+            alert('This email is already taken.');
+            return;
+        }
     };
 
     return (
