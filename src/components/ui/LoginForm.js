@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import loginValidationSchema from '@/validators/loginValidationSchema';
+
 import { FcGoogle } from 'react-icons/fc';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import loginValidationSchema from '@/validators/loginValidationSchema';
+import { authClient } from '@/lib/authClient';
 
 export default function LoginForm() {
     const {
@@ -15,8 +17,24 @@ export default function LoginForm() {
         resolver: zodResolver(loginValidationSchema),
     });
 
-    const handleOnSubmit = (data) => {
-        console.log(data);
+    const handleOnSubmit = async (form) => {
+        const { email, password } = form;
+
+        const { data, error } = await authClient.signIn.email({
+            email,
+            password,
+            rememberMe: true,
+        });
+
+        if (data?.token) {
+            alert('Login successfully.');
+            return;
+        }
+
+        if (error?.status === 401) {
+            alert('Invalid email or password');
+            return;
+        }
     };
 
     return (
