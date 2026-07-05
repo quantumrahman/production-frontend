@@ -21,14 +21,19 @@ export default function LoginForm() {
 
     return (
         <div className="mx-auto w-full max-w-[500px] px-5 lg:px-10">
-            <h1 className="text-center text-[32px] leading-[36px] font-semibold text-white">
-                Welcome back
-            </h1>
+            <div className="flex flex-col items-center justify-center gap-y-4">
+                <h1 className="text-center text-[32px] leading-[36px] font-semibold text-white">
+                    Welcome back
+                </h1>
+                <p className="text-center text-sm text-gray-400">
+                    Good to see you again. Your next game is just a click away.
+                </p>
+            </div>
             <div className="mt-12 w-full">
                 <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-900 py-2.5 transition-colors duration-200 ease-linear hover:border-gray-800 hover:bg-gray-900">
                     <FcGoogle size={20} />
                     <span className="text-base font-medium text-white">
-                        Continue with Goolge
+                        Continue with Google
                     </span>
                 </button>
             </div>
