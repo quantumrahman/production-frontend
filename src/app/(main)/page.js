@@ -1,3 +1,9 @@
+import FeatureSection from '@/components/features/LandingPage/FeatureSection';
+
 export default function HomePage() {
-    // return <h1>Home page</h1>;
+    return (
+        <div className="w-full">
+            <FeatureSection />
+        </div>
+    );
 }
