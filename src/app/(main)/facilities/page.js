@@ -4,7 +4,10 @@ import FacilitiesSection from '@/components/features/FacilitiesPage/FacilitiesSe
 export default function Facilities() {
     return (
         <div className="w-full px-5 md:px-10">
-            <HeadingSection />
+            <HeadingSection
+                title={'Browse Facilities'}
+                paragraph={'Discover top-rated venues for every game.'}
+            />
             <FacilitiesSection />
         </div>
     );
